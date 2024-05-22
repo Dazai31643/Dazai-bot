@@ -104,8 +104,8 @@ ${tradutor.texto15[3]}
 
 --------------------------------
 
-${tradutor.texto16[0]} | ANTITOXIC
-${tradutor.texto16[1]} ${usedPrefix + command} antitoxic
+${tradutor.texto16[0]} | مضاد الشتائم
+${tradutor.texto16[1]} ${usedPrefix + command} مضاد الشتائم
 ${tradutor.texto16[2]}
 ${tradutor.texto16[3]}
 

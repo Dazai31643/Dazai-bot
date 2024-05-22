@@ -11,17 +11,7 @@ global.botnumber = ""
 global.confirmCode = ""
 
 global.owner = [
-  ['201552413139', '👑 Daai bot - Creador 👑', true],
-  ['201552413139', '💫 Dazai habeb - Collaborator 1 💫', true],
-  ['201552413139', '💫 dazai - Collaborator 2 💫', true],
-  ['201552413139', '💫 dazai - Collaborator 3 💫', true],
-  ['201552413139', '💫 dazai - Collaborator 4 💫', true],
-  ['201552413139', '💫 dazai - Collaborator 5 💫', true],
-  ['201552413139', '💫 dazai - Collaborator 6 💫', true],
-  ['201552413139', '💫 dazai - Rey Endymion 💫', false],
-  ['201552413139', '💫 dazai - Collaborator 8 💫', true],
-  ['201552413139', '💫 dazai - By Dazai 💫', true],
-  ['201552413139','💫 dazai - dazai💫', true],
+  ['201552413139', 'دازاي | محمد', true],
   ['201552413139'],
   ['201552413139'],
   ['201552413139'],

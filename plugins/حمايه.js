@@ -484,5 +484,5 @@ break;
   conn.sendMessage(m.chat, {text: `_*${tradutor.texto28[0]}*_\n\n*${tradutor.texto28[1]}* _${type}_ *fue* ${isEnable ? '_activada_' : '_desactivada_'} *${tradutor.texto28[2]}* ${isAll ? '_bot._' : isUser ? '' : '_chat._'}`}, {quoted: m});
   //conn.sendMessage(m.chat, {text: `▢ *Opción:* ${type}\n\n▢ *Estado:* ${isEnable ? 'Activado' : 'Desactivado'}\n\n▢ *Para* ${isAll ? 'este bot' : isUser ? '' : 'este chat'}`}, {quoted: m});
 };
-handler.command = /^((en|dis)able|(tru|fals)e|(turn)?[01])$/i;
+handler.command = /^((en|dis)able|(تفعي|تعطي)ل|(turn)?[01])$/i;
 export default handler;

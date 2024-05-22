@@ -36,6 +36,7 @@ global.prems = ['201552413139'];
 global.packname = 'Sticker';
 global.author = 'Dazai - Bot';
 global.wm = 'Dazai - Bot';
+global.menuvid = 'https://telegra.ph/file/0fe06d0eda559e194ab7e.mp4'
 global.titulowm = 'Dazai - Bot';
 global.titulowm2 = `Dazai - Bot`
 global.igfg = 'Dazai - Bot';

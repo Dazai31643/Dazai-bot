@@ -23,14 +23,14 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                           {
                             header: '☘️ قـسـم الـنـظـام',
                             title: '.النظام_كود',
-                            description: 'يجيب لك الاوامر',
-                            id: 'اوامر'
+                            description: '',
+                            id: '.اوامر'
                           },
                           {
                             header: '👑 قـسـم الـمـطـور',
                             title: '.المطور_كود',
-                            description: 'يعرفك المطور',
-                            id: 'المطور'
+                            description: '',
+                            id: '.المطور'
                           }
                         ]
                       }
@@ -49,6 +49,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
 handler.help = ['info']
 handler.tags = ['main']
-handler.command = ['القائمة']
+handler.command = ['المهام']
 
 export default handler

@@ -24,13 +24,13 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                             header: '☘️ قـسـم الـنـظـام',
                             title: '.النظام_كود',
                             description: '',
-                            id: '.اوامر'
+                            id: 'اوامر.js'
                           },
                           {
                             header: '👑 قـسـم الـمـطـور',
                             title: '.المطور_كود',
                             description: '',
-                            id: '.المطور'
+                            id: 'المطور.js'
                           }
                         ]
                       }

@@ -31,12 +31,18 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                             title:'المطور',
                             description: '',
                             id: '.المطور'
+                          },
+                           {
+                            header: 'اسئله',
+                            title:'يا بوت عطني سؤال انمي',
+                            description: '',
+                            id: '.سؤال'
                           }
                         ]   
                       }
                     ]
                   }),
-                   var imageUrl = "Menu2.jpg";
+                   messageParamsJson: ''
                 }
               ]
             }

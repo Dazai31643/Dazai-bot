@@ -1,7 +1,6 @@
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-   var imageUrl = "Menu2.jpg";
-    conn.relayMessage(m.chat, {
-      viewOnceMessage: {
+   conn.relayMessage(m.chat, {
+     viewOnceMessage: {
         message: {
           interactiveMessage: {
             header: {
@@ -33,11 +32,11 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                             description: '',
                             id: '.المطور'
                           }
-                        ]
+                        ]   
                       }
                     ]
                   }),
-                  messageParamsJson: ''
+                   var imageUrl = "Menu2.jpg";
                 }
               ]
             }

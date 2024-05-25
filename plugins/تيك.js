@@ -16,6 +16,6 @@ conn.sendFile(m.chat, url, 'tiktok.mp4', `*تمت المهمة* 🫡💚`.trim()
 }}
 handler.help = ['tiktok']
 handler.tags = ['dl']
-handler.command = /^(tt|tiktok)(dl|nowm)|تيك|تيكتوك|تيك-توك$/i
+handler.command = /^(tt|tiktok)(dl|nowm)|تيك|تيكتوك|تيك-توك$/i;
 handler.limit = 1
 export default handler

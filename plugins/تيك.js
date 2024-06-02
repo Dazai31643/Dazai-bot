@@ -1,53 +1,40 @@
-import * as fetch from 'node-fetch';
-import { tiktokdl, tiktokdlv2, tiktokdlv3 } from '@bochilteam/scraper';
+import { tiktokdl } from '@bochilteam/scraper';
+import fg from 'api-dylux';
 
-let handler = async (m, { conn, text, usedPrefix, command, args }) => {
-  let fkontak = {
-    "key": {
-      "participants": "0@s.whatsapp.net",
-      "remoteJid": "status@broadcast",
-      "fromMe": false,
-      "id": "Halo"
-    },
-    "message": {
-      "contactMessage": {
-        "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-      }
-    },
-    "participant": "0@s.whatsapp.net"
-  };
-
-  if (!text) {
-    return conn.sendMessage(m.chat, `*عاوز تحميل ايه يحب ؟🤔*\n*ضيف رابط الفديو يحب*\n*مثال:*\n*${usedPrefix + command} https://www.tiktok.com/@ox__zoro__ox?_t=8ggRMe37f9y&_r=1*`, fkontak, m);
+let handler = async (m, { conn, text, args, usedPrefix, command }) => {
+  if (!args[0] && m.quoted && m.quoted.text) {
+    args[0] = m.quoted.text;
+  }
+  if (!args[0] &&!m.quoted) {
+    return conn.sendMessage(m.chat, `اعطني الرابط \n\nمثال: https://vm.tiktok.com/ZMMPhv9Fb/`, m);
+  }
+  if (!args[0].match(/tiktok/gi)) {
+    return conn.sendMessage(m.chat, `تأكد من ان الرابط رابط تيك توك`, m);
   }
 
-  if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) {
-    return conn.sendMessage(m.chat, `*رابط التيكتوك غير صحيح*`, fkontak, m);
-  }
+  let txt = 'انا لا اتحمل ذنب اغانيك ';
 
   try {
-    await conn.sendMessage(m.chat, `⌛ _جاري الارسال..._\n▰▰▱▱▱\nالفديو بيتبعت ( احب افكرك انا خالي المسئولية من ذنوب اغانيك ) 🔰`, fkontak, m);
-
-    const { author: { nickname }, video, description } = await tiktokdl(args[0])
-     .catch(async _ => await tiktokdlv2(args[0]))
-     .catch(async _ => await tiktokdlv3(args[0]));
-
+    const { author: { nickname }, video, description } = await tiktokdl(args[0]);
     const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd;
 
     if (!url) {
-      return conn.sendMessage(m.chat, `*اوووف, خطأ أثناء محاولة تنزيل الفيديو ، يرجى المحاولة مرة أخرى*`, fkontak, m);
+      throw new Error('Failed to retrieve video URL');
     }
 
-    await conn.sendMedia(m.chat, url, 'tiktok.mp4', `*تمت المهمة* 🫡💚`.trim(), m);
-  } catch (error) {
-    console.error(error);
-    conn.sendMessage(m.chat, `*اوووف, خطأ أثناء محاولة تنزيل الفيديو ، يرجى المحاولة مرة أخرى*`, fkontak, m);
+    await conn.sendMedia(m.chat, url, 'tiktok.mp4', txt, m);
+  } catch (err) {
+    try {
+      let p = await fg.tiktok(args[0]);
+      await conn.sendMedia(m.chat, p.play, 'tiktok.mp4', txt, m);
+    } catch (err) {
+      conn.sendMessage(m.chat, '*An unexpected error occurred*', m);
+    }
   }
 };
 
-handler.help = ['tiktok'];
-handler.tags = ['dl'];
+handler.help = ['tiktok'].map((v) => v + 'url>');
+handler.tags = ['downloader'];
 handler.command = /^t(t|iktok(d(own(load(er)?)?|l))?|td(own(load(er)?)?|l))|تيك|تيكتوك$/i;
-handler.limit = 1;
 
 export default handler;

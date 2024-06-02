@@ -1,4 +1,4 @@
-let handler = async (m, { command, text` *اهلا بك في نقابة:*
+let handler = async (m, { command, text }) => m.reply(`*اهلا بك في نقابة:*
 *【𝐀𝐠𝐨𝐭𝐢『🌨️』𝐑𝐨𝐦𝐚𝐧】*
 *يرجي تعبئة الاستمارة والانتظار ⛄*
 *┙┉┉━┉┈──▾🌧️▾──┈┉━┉┉┕*

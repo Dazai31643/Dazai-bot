@@ -1,34 +1,27 @@
 import { tiktokdl } from '@bochilteam/scraper';
-import fg from 'api-dylux';
 
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
   if (!args[0] && m.quoted && m.quoted.text) {
     args[0] = m.quoted.text;
   }
-  if (!args[0] &&!m.quoted) {
-    return conn.sendMessage(m.chat, `اعطني الرابط \n\nمثال: https://vm.tiktok.com/ZMMPhv9Fb/`, m);
-  }
-  if (!args[0].match(/tiktok/gi)) {
-    return conn.sendMessage(m.chat, `تأكد من ان الرابط رابط تيك توك`, m);
-  }
+  if (!args[0] &&!m.quoted) throw `Provide the TikTok video URL \n\nExample: https://vm.tiktok.com/ZMMPhv9Fb/`;
+  if (!args[0].match(/tiktok/gi)) throw `Make sure the URL is a TikTok video URL`;
 
-  let txt = 'انا لا اتحمل ذنب اغانيك ';
+  let txt = 'I do not take responsibility for your video';
 
   try {
     const { author: { nickname }, video, description } = await tiktokdl(args[0]);
     const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd;
 
-    if (!url) {
-      throw new Error('Failed to retrieve video URL');
-    }
+    if (!url) throw `Failed to retrieve video URL`;
 
     await conn.sendMedia(m.chat, url, 'tiktok.mp4', txt, m);
   } catch (err) {
     try {
       let p = await fg.tiktok(args[0]);
       await conn.sendMedia(m.chat, p.play, 'tiktok.mp4', txt, m);
-    } catch (err) {
-      conn.sendMessage(m.chat, '*An unexpected error occurred*', m);
+    } catch {
+      m.reply('*An unexpected error occurred*');
     }
   }
 };

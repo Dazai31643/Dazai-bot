@@ -3,35 +3,51 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     viewOnceMessage: {
       message: {
         imageMessage: {
-          url: 'https://telegra.ph/file/c91d0366e69b33f7e3618.jpg' // <-- Add the URL of your image here
+          url: 'https://telegra.ph/file/c91d0366e69b33f7e3618.jpg' // أضف رابط الصورة هنا
         },
         interactiveMessage: {
           header: {
-            type: 'image',
-            imageUrl: 'https://telegra.ph/file/c91d0366e69b33f7e3618.jpg', // <-- Add the URL of your image here
-            buttons: [
-              {
-                buttonId: '.1',
-                buttonText: {
-                  displayText: 'اسـتـقـبـال'
-                }
-              },
-              {
-                buttonId: '.2',
-                buttonText: {
-                  displayText: 'الـتـرحـيـب'
-                }
-              },
-              {
-                buttonId: '.3',
-                buttonText: {
-                  displayText: 'استمارة النشر 🎩'
-                }
-              }
-            ]
+            title: '*🎗️ قـائـمـة الـاسـتـمـارات🎗️*'
           },
           body: {
             text: '🧿 افتح القائمة بواسطة الزر\n🍒 لا تلعب كثير في القائمة'
+          },
+          nativeFlowMessage: {
+            buttons: [
+              {
+                name: 'single_select',
+                buttonParamsJson: JSON.stringify({
+                  title: 'اضغط هنا للحصول علي استمارات القروب',
+                  sections: [
+                    {
+                      title: 'List',
+                      highlight_label: 'ON',
+                      rows: [
+                        {
+                          header: 'استمارة الاستقبال 🎭',
+                          title: 'اسـتـقـبـال',
+                          description: '',
+                          id: '.1'
+                        },
+                        {
+                          header: 'استمارة الترحيب 🎊',
+                          title:'الـتـرحـيـب',
+                          description: '',
+                          id: '.2'
+                        },
+                         {
+                          header: 'استمارة النشر 🎩',
+                          title:'استمارة النشر 🎩',
+                          description: '',
+                          id: '.3'
+                        }
+                      ]   
+                    }
+                  ]
+                }),
+                 messageParamsJson: ''
+              }
+            ]
           }
         }
       }

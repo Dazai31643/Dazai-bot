@@ -1,39 +1,36 @@
-const WhatsAPI = require('whatsapi');
+let handler = async (m, { command, text }) => m.reply(`*﷽*
+*نقابة:*
+*【𝐀𝐠𝐨𝐭𝐢『🌨️』𝐑𝐨𝐦𝐚𝐧】*
+*╮───── ◉🌧️◉ ─────╭*
+*مميزات النقابه 🎈*
+*بوت مطور بعديد من الاوامر الجديده 🧸*
+*مشرفين ممتازين واصحاب خبره 🎊*
+*توزيع ارقام وهميه للاعضاء المتفاعلين 💎*
+*فعاليات وسوالف ممتعه ⛄*
+*فرص للحصول علي مناصب مشرفين 📯*
+*بنك ومتجر مطورين قريبا 🏪*
+*اعضاء متفاعلين ومشرفين حيادين 🛡️*
+*اداره ممتازه هدفها ارضاء الاعضاء 🧭*
+*مسموح جميع الالقاب عدا الايتشي والهينتاي 🧧*
+*ينقصنا انت فقط للدخول 🔮*
+*╮───── ◉🌧️◉ ─────╭*
+*قوانين النقابة ⚖️*
+*يمنع الكلام بشكل بذئ 🔞*
+*يمنع ارسال اشياء خادشه للحياه ⚔️*
+*يمنع ارسال روابط قروبات او قنوات 📵*
+*وفقط نريد منك الاحترام محترم خش وبس 🧭*
+*╮───── ◉🌧️◉ ─────╭*
+*الرابط:*
+*『https://chat.whatsapp.com/EgyxNZdCpOv46WYxXGvXzH 』*
+*من طرف 📲『دازاي』*
+*╯───── ◉🌧️◉ ─────╰*
+*تحيات ادارة نقابة:*
+*【𝐀𝐠𝐨𝐭𝐢『🌨️』𝐑𝐨𝐦𝐚𝐧】*`.trim(), null, m.mentionedJid ? {
+  mentions: m.mentionedJid
+} : {})
 
-// إعدادات البوت
-const botNumber = '+994406151508'; // رقم الهاتف الخاص بك
-const botName = '𝙳𝙰𝚉𝙰𝚒 𝙱𝙾𝚃'; // اسم البوت
-const apiToken = 'YOUR_API_TOKEN'; // رمز_API الخاص بك
+handler.help = ['الاوامر <teks>?']
+handler.tags = ['الاوامر', 'fun']
+handler.command = /^(3|الاستقبال|النشر)$/i
 
-// إعدادات المباريات
-const footballAPI = 'https://api.football-data.org/v2/matches'; // رابط API المباريات
-const apiKey = 'YOUR_API_KEY'; // رمز_API الخاص بك
-
-// إنشاء مثيل WhatsAPI
-const wa = new WhatsAPI(botNumber, botName, apiToken);
-
-// هاندلر WhatsAPI
-const handler = {
-  command: /^(مباريات اليوم)$/i,
-  async execute(message) {
-    const matches = await getTodayMatches();
-    const messageText = `أهم المباريات اليومية:\n\n${matches.map((match) => `${match.homeTeam.name} vs ${match.awayTeam.name} - ${match.utcDate}`).join('\n')}`;
-    await wa.sendMessage(message.from, messageText);
-  },
-};
-
-// دالة لجلب المباريات اليومية
-async function getTodayMatches() {
-  const response = await fetch(`${footballAPI}?date=${new Date().toISOString().split('T')[0]}`, {
-    headers: {
-      'X-Auth-Token': apiKey,
-    },
-  });
-  const data = await response.json();
-  const matches = data.matches;
-  const importantMatches = matches.filter((match) => match.competition.name === 'English Premier League' || match.competition.name === 'La Liga' || match.competition.name === 'Bundesliga');
-  return importantMatches;
-}
-
-// إضافة الهاندلر إلى WhatsAPI
-wa.addHandler(handler);
+export default handler

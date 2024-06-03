@@ -4,7 +4,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         message: {
           interactiveMessage: {
             header: {
-              title: '*🎗️ قـائـمـة الـاوامــر🎗️*'
+              title: '*🎗️ قـائـمـة الـاسـتـمـارات🎗️*'
             },
             body: {
               text: '🧿 افتح القائمة بواسطة الزر\n🍒 لا تلعب كثير في القائمة'
@@ -14,7 +14,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                 {
                   name: 'single_select',
                   buttonParamsJson: JSON.stringify({
-                    title: 'دوس عليا 💔',
+                    title: 'اضغط هنا للحصول علي استمارات القروب',
                     sections: [
                       {
                         title: 'List',

@@ -32,7 +32,7 @@ let str =
 ┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 ┃ 𝙉𝙐𝙈𝙀𝙍𝙊 𝘿𝙀 𝙎𝙀𝙍𝙄𝙀
 ┃ *${sn}*`.trim()
-    conn.sendFile(m.chat, pp, 'pp.jpg', str, fkontak, false, { contextInfo: { mentionedJid }}) 
+    conn.sendFile(m.chat, pp, 'pp.jpg', str, false, { contextInfo: { mentionedJid }}) 
   }
 }
 handler.help = ['profile [@user]']

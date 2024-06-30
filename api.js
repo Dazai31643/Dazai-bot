@@ -15,6 +15,12 @@ global.openai_key = 'sk-0';
 global.openai_org_id = 'org-3';
 /* Obtén tu ID de organización en este enlace: https://platform.openai.com/account/org-settings */
 
+global.MyApiRestBaseUrl = 'https://api.cafirexos.com'; // Bloqueo de IP -> usar esta para no ser bloqueado: 'https://api-brunosobrino.onrender.com';
+global.MyApiRestApikey = 'BrunoSobrino';
+
+global.MyApiRestBaseUrl2 = 'https://api-brunosobrino-dcaf9040.koyeb.app';
+
+global.MyApiRestBaseUrl3 = 'https://api-brunosobrino.onrender.com'; 
 
 global.keysZens = ['LuOlangNgentot', 'c2459db922', '37CC845916', '6fb0eff124', 'hdiiofficial', 'fiktod', 'BF39D349845E', '675e34de8a', '0b917b905e6f'];
 global.keysxxx = keysZens[Math.floor(keysZens.length * Math.random())];
@@ -22,7 +28,7 @@ global.keysxteammm = ['29d4b59a4aa687ca', '5LTV57azwaid7dXfz5fzJu', 'cb15ed422c7
 global.keysxteam = keysxteammm[Math.floor(keysxteammm.length * Math.random())];
 global.keysneoxrrr = ['5VC9rvNx', 'cfALv5'];
 global.keysneoxr = keysneoxrrr[Math.floor(keysneoxrrr.length * Math.random())];
-global.lolkeysapi = ['GataDios']; // ['BrunoSobrino_2']
+global.lolkeysapi = ['Gata_Dios']; // ['BrunoSobrino_2']
 global.itsrose = ['4b146102c4d500809da9d1ff'];
 
 global.APIs = {
@@ -43,7 +49,8 @@ global.APIs = {
   vihangayt: 'https://vihangayt.me',
   erdwpe: 'https://api.erdwpe.com',
   xyroinee: 'https://api.xyroinee.xyz',
-  nekobot: 'https://nekobot.xyz'
+  nekobot: 'https://nekobot.xyz',
+  BK9: 'https://api.bk9.site'
 },
 global.APIKeys = {
   'https://api.xteam.xyz': `${keysxteam}`,
@@ -55,7 +62,8 @@ global.APIKeys = {
   'https://api.ibeng.tech/docs': 'tamvan',
   'https://api.itsrose.site': 'Rs-Zeltoria',
   'https://api-xcoders.site': 'Frieren',
-  'https://api.xyroinee.xyz': 'uwgflzFEh6'
+  'https://api.xyroinee.xyz': 'uwgflzFEh6',
+  'https://apikasu.onrender.com': 'ApiKey'
 };
 
 /** ************************/

@@ -6,7 +6,7 @@ import path, {join} from 'path';
 import {fileURLToPath, pathToFileURL} from 'url';
 import {platform} from 'process';
 import * as ws from 'ws';
-import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, rmSync, watch} from 'fs';
+import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, rmSync, watch, unlink} from 'fs';
 import yargs from 'yargs';
 import {spawn} from 'child_process';
 import lodash from 'lodash';
@@ -112,7 +112,7 @@ global.authFile = `MysticSession`;
 const {state, saveState, saveCreds} = await useMultiFileAuthState(global.authFile);
 const msgRetryCounterMap = (MessageRetryMap) => { };
 const msgRetryCounterCache = new NodeCache()
-const {version} = await fetchLatestBaileysVersion();
+//const {version} = await fetchLatestBaileysVersion();
 let phoneNumber = global.botnumber
 
 const methodCodeQR = process.argv.includes("qr")
@@ -143,7 +143,7 @@ const connectionOptions = {
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 mobile: MethodMobile, 
-browser: opcion == '1' ? ['TheMystic-Bot-MD', 'Safari', '2.0.0'] : methodCodeQR ? ['TheMystic-Bot-MD', 'Safari', '2.0.0'] : ['Ubuntu', 'Chrome', '110.0.5585.95'],
+browser: opcion == '1' ? ['TheMystic-Bot-MD', 'Safari', '2.0.0'] : methodCodeQR ? ['TheMystic-Bot-MD', 'Safari', '2.0.0'] : ['Ubuntu', 'Chrome', '20.0.04'],
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -158,7 +158,7 @@ return msg?.message || ""
 msgRetryCounterCache,
 msgRetryCounterMap,
 defaultQueryTimeoutMs: undefined,   
-version
+version: [2, 2413, 1]
 }
 
 global.conn = makeWASocket(connectionOptions);
@@ -246,6 +246,32 @@ function clearTmp() {
   });
 }
 
+// Función para eliminar archivos core.<numero>
+const dirToWatchccc = path.join(__dirname, './');
+function deleteCoreFiles(filePath) {
+  const coreFilePattern = /^core\.\d+$/i;
+  const filename = path.basename(filePath);
+  if (coreFilePattern.test(filename)) {
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(`Error eliminando el archivo ${filePath}:`, err);
+      } else {
+        console.log(`Archivo eliminado: ${filePath}`);
+      }
+    });
+  }
+}
+fs.watch(dirToWatchccc, (eventType, filename) => {
+  if (eventType === 'rename') {
+    const filePath = path.join(dirToWatchccc, filename);
+    fs.stat(filePath, (err, stats) => {
+      if (!err && stats.isFile()) {
+        deleteCoreFiles(filePath);
+      }
+    });
+  }
+});
+
 function purgeSession() {
 let prekey = []
 let directorio = readdirSync("./MysticSession")
@@ -299,6 +325,8 @@ console.log(chalk.bold.red(`Archivo ${file} no borrado` + err))
 }
 
 async function connectionUpdate(update) {
+  
+
   const {connection, lastDisconnect, isNewLogin} = update;
   global.stopped = connection;
   if (isNewLogin) conn.isInit = true;
@@ -356,9 +384,12 @@ if (connection === 'close') {
 process.on('uncaughtException', console.error);
 
 let isInit = true;
+
 let handler = await import('./handler.js');
 global.reloadHandler = async function(restatConn) {
+  
   try {
+   
     const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error);
     if (Object.keys(Handler || {}).length) handler = Handler;
   } catch (e) {
@@ -383,14 +414,16 @@ global.reloadHandler = async function(restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate);
   }
 
-  conn.welcome =' مرحبا بك نورت نقابتنا 👋\n@user';
-  conn.bye = ' تطلع يجي غيرك محد مهتم الا لو كنت دازاي 👋\n@user';
-  conn.spromote = '*[ ℹ️ ] @user اصبح مشرفا.*';
-  conn.sdemote = '*[ ℹ️ ] @user لم يعد مشرفا.*';
-  conn.sDesc = '*[ ℹ️ ]  تم تغيير وصف المجموعه.*';
-  conn.sSubject = '*[ ℹ️ ]  تم تغيير اسم المجموعه.*';
-  conn.sIcon = '*[ ℹ️ ]  تم تحديث ايقونة المجموعه.*';
-  conn.sRevoke = '*[ ℹ️ ] تمت اعادة تعيين رابط المجموعه.*';
+  // Para cambiar estos mensajes, solo los archivos en la carpeta de language, 
+  // busque la clave "handler" dentro del json y cámbiela si es necesario
+  conn.welcome = '👋 ¡Bienvenido/a!\n@user';
+  conn.bye = '👋 ¡Hasta luego!\n@user';
+  conn.spromote = '*[ ℹ️ ] @user Fue promovido a administrador.*';
+  conn.sdemote = '*[ ℹ️ ] @user Fue degradado de administrador.*';
+  conn.sDesc = '*[ ℹ️ ] La descripción del grupo ha sido modificada.*';
+  conn.sSubject = '*[ ℹ️ ] El nombre del grupo ha sido modificado.*';
+  conn.sIcon = '*[ ℹ️ ] Se ha cambiado la foto de perfil del grupo.*';
+  conn.sRevoke = '*[ ℹ️ ] El enlace de invitación al grupo ha sido restablecido.*';
 
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
@@ -544,7 +577,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `𝐷𝐴𝑍𝐴𝐼-𝐵𝛩𝑇 [ ⏳ ] Uptime: ${uptime}`;
+  const bio = `[ ⏳ ] Uptime: ${uptime}`;
   await conn.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
